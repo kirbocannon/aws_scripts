@@ -1,6 +1,7 @@
 import nltk
+
+from archive.TextToSpeech import voiceInputToAlexis
 from aws import callServerStatus
-from TextToSpeech import voiceInputToAlexis
 
 #tags
 NNP = 'NNP'

@@ -1,14 +1,16 @@
-import requests
 import json
-from RecAudio import recordAudio
+
+import requests
 from questionsEvaluation import *
+
+from archive.RecAudio import recordAudio
 
 recordAudio()
 
 url = 'https://stream.watsonplatform.net/speech-to-text/api/v1/recognize'
 json_file = '/Users/KennyB/Desktop/jsonCatch.json'
-username = 'e519598d-bb0d-4d38-9355-eb4ebc1289fc'
-password = 'wboCp3pIjhQY'
+username = 'blah'
+password = 'blah'
 headers= {'Content-Type': 'audio/wav'}
 audio = open('/Users/KennyB/Desktop/voiceRecordings/test.wav', 'rb')
 qflag = False

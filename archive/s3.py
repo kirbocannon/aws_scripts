@@ -19,21 +19,11 @@ parser.add_argument("-v", "--verbose", action = "store_true", help= "Verbose out
 args = parser.parse_args()
 complete_flag = 0
 
-s3_client = boto3.client(
-    's3',
-    #region_name='us-east-1',
-    aws_access_key_id='AKIAJGU2DOXY6RNO64HA',
-    aws_secret_access_key='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',
+s3_client = boto3.client('s3')
 
-                        )
+s3 = boto3.resource('s3',)
 
-s3 = boto3.resource(
-    's3',
-    #region_name='us-east-1',
-    aws_access_key_id='AKIAJGU2DOXY6RNO64HA',
-    aws_secret_access_key='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',
 
-                    )
 
 # upload/download/remove files form the bucket specified
 if args.action.lower() == 'download':
