@@ -30,8 +30,8 @@ if __name__ == "__main__":
         # get the lambda function bucket
         response = s3.get_bucket_policy(Bucket=bucket_name)
         # policy is string format, convert to json
-        to_json = json.loads(response['Policy'])
-        bucket_policy = to_json
+        from_json = json.loads(response['Policy'])
+        bucket_policy = from_json
         # get currently allowed accounts
         current_principals = bucket_policy['Statement'][0]['Principal']['AWS']
         # if list account argument used
@@ -55,7 +55,7 @@ if __name__ == "__main__":
             elif type(current_principals) is list:
                 current_principals.append(args.add_account)
             # serialize in json string format using json.dumps. push new bucket policy to bucket.
-            new_policy = json.dumps(to_json, sort_keys=True, indent=4)
+            new_policy = json.dumps(from_json, sort_keys=True, indent=4)
             apply_bucket = s3.put_bucket_policy(Bucket=bucket_name, Policy=new_policy)
             # print(new_policy)
             status_code = apply_bucket['ResponseMetadata']['HTTPStatusCode']
@@ -63,7 +63,7 @@ if __name__ == "__main__":
         elif args.rm_account:
             if 'arn:aws:iam::{}:root'.format(args.rm_account) in current_principals:
                 current_principals.remove('arn:aws:iam::{}:root'.format(args.rm_account))
-                new_policy = json.dumps(to_json, sort_keys=True, indent=4)
+                new_policy = json.dumps(from_json, sort_keys=True, indent=4)
                 apply_bucket = s3.put_bucket_policy(Bucket=bucket_name, Policy=new_policy)
                 # print(new_policy)
                 status_code = apply_bucket['ResponseMetadata']['HTTPStatusCode']
