@@ -1,9 +1,8 @@
 # This script will update the principal (allowed accounts) on the bucket policy of network engineering bucket
-# in AWS shared services prod account. Principal/Account # are interchangeable terms in AWS
+# in AWS account. Principal/Account # are interchangeable terms in AWS
 # You must run this script prior to running cloud formation because all lambda scripts are
 # hosted in this s3 bucket. A bucket policy must already exist on the bucket for the script to work
-# Developer: Kenneth Buchanan
-# Email: kenneth.buchanan@moodys.com
+
 
 import boto3
 import json
@@ -17,7 +16,7 @@ group.add_argument('--remove-account', dest='rm_account', type=str, help='Enter 
 group.add_argument('--list-account', dest='list_account', const=True, action='store_const',
                     help='List accounts currently allowed access to bucket policy')
 args = parser.parse_args()
-bucket_name = 'buchanan.neteng-lambda-functions'
+bucket_name = 'my-bucket'
 
 
 if __name__ == "__main__":
